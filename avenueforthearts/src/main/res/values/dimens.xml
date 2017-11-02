@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="rv_swipe_icon_inset">32dp</dimen>
+    <dimen name="divider_line_thickness">1dp</dimen>
+
+    <dimen name="logo_height">44dp</dimen>
+    <dimen name="search_result_peek">16dp</dimen>
+
+    <dimen name="min_clickable_height">48dp</dimen>
+
+    <dimen name="filter_peek_plus_shadow_height">48dp</dimen>
+    <dimen name="filter_peek_height">44dp</dimen>
+    <dimen name="shadow_height">4dp</dimen>
+
+    <dimen name="mapview_padding_horizontal">50dp</dimen>
+    <dimen name="mapview_padding_top">50dp</dimen>
+    <dimen name="mapview_padding_bottom">20dp</dimen>
+    <dimen name="mapview_line_thickness">1dp</dimen>
+</resources>

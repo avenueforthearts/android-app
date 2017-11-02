@@ -1,0 +1,6 @@
+<resources>
+    <string name="placeholder_darth_plagueis1">Did you ever hear the tragedy of Darth Plagueis The Wise?</string>
+    <string name="placeholder_darth_plagueis2">I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side, he could even keep the ones he cared about from dying.</string>
+
+    <string name="app_name">Aveneue for the Arts</string>
+</resources>

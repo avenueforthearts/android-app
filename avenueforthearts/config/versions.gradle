@@ -1,0 +1,15 @@
+apply plugin: 'com.android.application'
+
+android {
+    defaultConfig {
+        applicationId "org.dwellingplacegr.avenueforthearts"
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
+    }
+}

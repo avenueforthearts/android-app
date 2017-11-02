@@ -1,0 +1,31 @@
+def password = getPassword("org.dwellingplacegr.avenueforthearts")
+
+android {
+    signingConfigs {
+        release {
+            storeFile file("$rootProject.projectDir/avenueforthearts/config/signing/lmax.jks")
+            storePassword password
+            keyAlias 'avenueforthearts'
+            keyPassword password
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+def getPassword(String item) {
+    def stdout = new ByteArrayOutputStream()
+    def stderr = new ByteArrayOutputStream()
+    exec {
+        commandLine 'security', '-q', 'find-generic-password', '-s', item, '-w'
+        standardOutput = stdout
+        errorOutput = stderr
+        ignoreExitValue true
+    }
+    //noinspection GroovyAssignabilityCheck
+    stdout.toString().trim()
+}
