@@ -45,7 +45,7 @@ android {
             minifyEnabled false
             shrinkResources false
 
-            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/master/\""
+            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/eventParsing/\""
 
             resValue "string", "google_maps_key_res", "AIzaSyB1hplCqdjLnn6I6HgQL4Luzw0Wu1iTev8"
             resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix

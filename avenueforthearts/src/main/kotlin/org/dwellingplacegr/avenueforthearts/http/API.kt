@@ -1,6 +1,5 @@
 package org.dwellingplacegr.avenueforthearts.http
 
-import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -37,7 +36,10 @@ class API {
         )
 
       retrofitBuilder.addConverterFactory(
-        MoshiConverterFactory.create(moshi)
+        MoshiConverterFactory.create(Moshi.Builder()
+          .add(TimestampConversion())
+          .build()
+        )
       )
 
       retrofitBuilder.build()
@@ -50,10 +52,6 @@ class API {
 
   interface Feed {
     @GET("events.json")
-    fun getFeed(): Single<List<Event>>
+    fun getFeed(): Single<Container>
   }
 }
-
-data class Event(
-  val name: String
-)
