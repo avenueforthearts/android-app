@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_favorites"
+        android:id="@+id/tabEvents"
         android:enabled="true"
         android:icon="@android:drawable/ic_dialog_info"
         android:title="@string/bar_item_events"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_schedules"
+        android:id="@+id/tabMaps"
         android:enabled="true"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/bar_item_map"
