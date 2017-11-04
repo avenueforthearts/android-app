@@ -19,15 +19,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.MarkerOptions
 import android.content.Intent
+import android.location.Geocoder
 import android.net.Uri
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_event_detail.*
-import org.dwellingplacegr.avenueforthearts.BuildConfig
 import org.dwellingplacegr.avenueforthearts.ext.android.isGone
+import timber.log.Timber
 
 
 class EventDetailFragment: Fragment(), OnMapReadyCallback {
@@ -98,10 +97,29 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   }
 
   override fun onMapReady(map: GoogleMap) {
-    val location = event.place.location ?: return
+    val location = event.place.location
+    val placemark = if (location != null) {
+      LatLng(location.latitude, location.longitude)
+    } else {
+      try {
+        val geocoder = Geocoder(context)
+        val address = geocoder.getFromLocationName(event.place.name, 1).firstOrNull()
+        address?.let { LatLng(it.latitude, it.longitude) }
+      } catch (e: Exception) {
+        // Just in case
+        Timber.e(e)
+        null
+      }
+    }
+
+    if (placemark == null) {
+      Timber.e("Could not geocode '${event.place.name}'")
+      return
+    }
+
+    mapContainer.isGone = false
     map.uiSettings.setAllGesturesEnabled(false)
 
-    val placemark = LatLng(location.latitude, location.longitude)
     val marker = MarkerOptions().position(placemark).title(event.place.name)
     map.addMarker(marker)
     val cameraPosition = CameraPosition.builder()
@@ -109,6 +127,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
       .zoom(17f)
       .build()
     map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
     map.setOnMapClickListener { _ ->
       val uri = Uri.parse("geo:${placemark.latitude},${placemark.longitude}?z=17&q=${marker.title}")
       val mapIntent = Intent(Intent.ACTION_VIEW, uri)
@@ -122,12 +141,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
     this.subheading = container.findViewById(R.id.sub)
 
     this.mapContainer = container.findViewById(R.id.mapContainer)
-    if (this.event.place.location?.latitude != null) {
-      this.map = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-      this.map.getMapAsync(this)
-      this.mapContainer.isGone = false
-    } else {
-      this.mapContainer.isGone = true
-    }
+    this.map = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+    this.map.getMapAsync(this)
   }
 }
