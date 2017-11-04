@@ -5,7 +5,7 @@ import com.squareup.moshi.ToJson
 import org.joda.time.DateTime
 
 @Suppress("unused")
-class TimestampConversion {
+class DateTimeAdapter {
 
     @FromJson
     //2017-10-02T16:00:00-0400

@@ -4,13 +4,16 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import org.dwellingplacegr.avenueforthearts.http.API
+import org.dwellingplacegr.avenueforthearts.http.DateTimeAdapter
 import javax.inject.Named
 
 @Module
 class HttpModule {
   @Provides
   fun provideMoshi(): Moshi {
-    return Moshi.Builder().build()
+    return Moshi.Builder()
+      .add(DateTimeAdapter())
+      .build()
   }
 
   @Provides

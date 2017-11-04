@@ -1,15 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.MainActivity"
+    android:orientation="vertical"
+    >
 
     <FrameLayout
         android:id="@+id/event_list_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         />
 
-</android.support.design.widget.CoordinatorLayout>
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:itemBackground="@color/white"-->
+        <!--app:itemIconTint="@color/secondary"-->
+        <!--app:itemTextColor="@color/secondary"-->
+        <!--app:-->
+        <!--app:menu="@menu/bottom_navigation_main" />-->
+
+</LinearLayout>

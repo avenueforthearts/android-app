@@ -39,6 +39,6 @@ class App : MultiDexApplication() {
 
     JodaTimeAndroid.init(this)
 
-    SyncHelper.initializePeriodicSync(this)
+//    SyncHelper.initializePeriodicSync(this)
   }
 }

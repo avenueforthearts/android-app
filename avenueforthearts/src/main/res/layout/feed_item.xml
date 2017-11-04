@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
     <android.support.v7.widget.CardView
@@ -19,50 +20,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:clickable="true"
             android:background="?attr/selectableItemBackground"
             android:focusable="true"
             >
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder_darth_plagueis1"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_marginBottom="4dp"
+            <ImageView
+                android:id="@+id/coverImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/happytrails"
+                android:contentDescription="@string/content_desc_event_cover_photo"
+                android:layout_marginBottom="8dp"
                 />
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/placeholder_darth_plagueis2"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_marginBottom="4dp"
-                android:maxLines="3"
-                android:ellipsize="end"
-                />
+                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                >
 
-            <TextView
-                android:id="@+id/dateAndTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nov 10, 1:00 PM - Nov 10, 3:00 PM"
-                style="@style/TextAppearance.AppCompat.Caption"
-                />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_darth_plagueis1"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_marginBottom="4dp"
+                    />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sanctuary Folk Art Gallery"
-                style="@style/TextAppearance.AppCompat.Caption"
-                />
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_darth_plagueis2"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_marginBottom="4dp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    />
+
+                <TextView
+                    android:id="@+id/dateAndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Nov 10, 1:00 PM - Nov 10, 3:00 PM"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Sanctuary Folk Art Gallery"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="avenueRed">#bc2a2c</color>
-    <color name="avenueDarkerRed">#880409</color>
+    <color name="pms187">#a6192e</color>
+    <color name="idk">#cc4229</color>
+    <color name="pms877">#8a8d8f</color>
+
+    <color name="avenueRed">@color/pms187</color>
+    <color name="avenueDarkerRed">#730000</color>
     <color name="oceanBlue">#006ab5</color>
     <color name="boringGreen">#66bb6a</color>
     <color name="boringGreen_50">#7f66bb6a</color>
     <color name="golden">#f6c500</color>
     <color name="error_red">#f4511e</color>
     <color name="warning_red">#c62828</color>
+    <color name="white">#fff</color>
 
     <color name="solid_gray_90">#e6e6e6</color>
     <color name="solid_gray_60">#999999</color>
@@ -25,6 +30,12 @@
 
     <color name="colorPrimary">@color/avenueRed</color>
     <color name="colorPrimaryDark">@color/avenueDarkerRed</color>
+    <color name="secondary">@color/pms877</color>
     <color name="colorAccent">#FF4081</color>
+
+    <array name="swipeRefreshColors">
+        <item>@color/colorPrimary</item>
+        <item>@color/secondary</item>
+    </array>
 </resources>
 

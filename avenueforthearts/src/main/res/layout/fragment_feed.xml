@@ -10,6 +10,7 @@
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/sortFilters"
         >
@@ -40,6 +41,16 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 >
+
+                <ImageView
+                    android:id="@+id/loadingImage"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/ic_avenue_logo_primary"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    tools:ignore="ContentDescription"
+                    />
 
                 <TextView
                     android:id="@+id/emptyHeading"

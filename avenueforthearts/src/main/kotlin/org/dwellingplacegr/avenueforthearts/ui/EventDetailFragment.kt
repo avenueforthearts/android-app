@@ -20,19 +20,29 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.MarkerOptions
 import android.content.Intent
 import android.net.Uri
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CoordinatorLayout
 import android.widget.ImageView
+import android.widget.TextView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_event_detail.*
 import org.dwellingplacegr.avenueforthearts.BuildConfig
+import org.dwellingplacegr.avenueforthearts.ext.android.isGone
 
 
 class EventDetailFragment: Fragment(), OnMapReadyCallback {
-  private lateinit var map: SupportMapFragment
 
   companion object {
     const val ARG_EVENT = "event"
   }
 
   @Inject lateinit var moshi: Moshi
+
+  private lateinit var appBar: AppBarLayout
+  private lateinit var mapContainer: View
+  private lateinit var map: SupportMapFragment
+  private lateinit var heading: TextView
+  private lateinit var subheading: TextView
 
   private val event: Event by lazy {
     val json = arguments?.getString(ARG_EVENT)!!
@@ -69,19 +79,30 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   override fun onResume() {
     super.onResume()
 
-    this.map = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-    this.map.getMapAsync(this)
+    bindViews(view!!)
 
-    val backdrop = view?.findViewById<ImageView>(R.id.backdrop)
-    Picasso.with(activity)
-      .load("https://scontent-ort2-1.xx.fbcdn.net/v/t1.0-9/22089969_1547046205339337_1393822853490504093_n.jpg?oh=0f1256e57b7732764a579ce900342c00&oe=5AAAD025")
-      .into(backdrop)
+    this.heading.text = event.name
+    this.subheading.text = event.description.replace("\\s+", " ")
+
+    val backdrop = view?.findViewById<ImageView>(R.id.backdrop) ?: return
+    val cover = event.cover
+
+    if (cover != null) {
+      Picasso.with(activity)
+        .load(cover.source)
+        .into(backdrop)
+    } else {
+      backdrop.isGone = true
+      appBar.setExpanded(false)
+    }
   }
 
   override fun onMapReady(map: GoogleMap) {
+    val location = event.place.location ?: return
     map.uiSettings.setAllGesturesEnabled(false)
-    val placemark = LatLng(42.959852, -85.667677)
-    val marker = MarkerOptions().position(placemark).title("Sanctuary Folk Art Gallery")
+
+    val placemark = LatLng(location.latitude, location.longitude)
+    val marker = MarkerOptions().position(placemark).title(event.place.name)
     map.addMarker(marker)
     val cameraPosition = CameraPosition.builder()
       .target(placemark)
@@ -92,6 +113,21 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
       val uri = Uri.parse("geo:${placemark.latitude},${placemark.longitude}?z=17&q=${marker.title}")
       val mapIntent = Intent(Intent.ACTION_VIEW, uri)
       startActivity(mapIntent)
+    }
+  }
+
+  private fun bindViews(container: View) {
+    this.appBar = container.findViewById(R.id.appbar)
+    this.heading = container.findViewById(R.id.head)
+    this.subheading = container.findViewById(R.id.sub)
+
+    this.mapContainer = container.findViewById(R.id.mapContainer)
+    if (this.event.place.location?.latitude != null) {
+      this.map = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+      this.map.getMapAsync(this)
+      this.mapContainer.isGone = false
+    } else {
+      this.mapContainer.isGone = true
     }
   }
 }

@@ -8,5 +8,11 @@
     <string name="error_swipe_to_reload">Swipe down from the top of the screen to reload.</string>
     <string name="error_downloading_events">Sorry! We were unable to download events happening on the Avenue</string>
     <string name="checking_out_whats_happening">Getting a list of events on the Avenue</string>
-    <string name="sit_tight">Sit tight...</string>
+    <string name="sit_tight">Sit tight…</string>
+    <string name="month_day_format">E, MMM d</string>
+    <string name="long_datetime_format">%1$s at %2$s</string>
+    <string name="time_range_format">%1$s - %2$s</string>
+    <string name="content_desc_event_cover_photo">Event cover photo</string>
+    <string name="bar_item_events">Events</string>
+    <string name="bar_item_map">Map</string>
 </resources>

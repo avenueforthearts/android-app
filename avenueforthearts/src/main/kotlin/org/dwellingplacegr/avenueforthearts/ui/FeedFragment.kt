@@ -1,5 +1,7 @@
 package org.dwellingplacegr.avenueforthearts.ui
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -7,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.moshi.Moshi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,11 +23,13 @@ import org.dwellingplacegr.avenueforthearts.http.API
 import org.dwellingplacegr.avenueforthearts.http.Event
 import org.dwellingplacegr.avenueforthearts.injection.App
 import org.dwellingplacegr.avenueforthearts.ui.EventDetailFragment.Companion.ARG_EVENT
+import org.jetbrains.anko.connectivityManager
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.annotations.Nls
 import timber.log.Timber
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -39,11 +44,6 @@ class FeedFragment: Fragment() {
   private lateinit var emptyHeading: TextView
   private lateinit var emptySubheading: TextView
   private var susbscribers = CompositeDisposable()
-
-  private var adapter = FeedAdapter(emptyList(), this::onEventSelected)
-    set(value) {
-      this.recycler.adapter = value
-    }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.fragment_feed, container, false)
@@ -71,6 +71,10 @@ class FeedFragment: Fragment() {
     this.swipeRefresh.onRefresh {
       refreshEvents()
     }
+    this.swipeRefresh.setColorSchemeResources(
+      R.color.colorPrimary,
+      R.color.secondary
+    )
     this.recycler = container.findViewById(R.id.feedList)
     this.emptyView = container.findViewById(R.id.emptyView)
     this.emptyHeading = container.findViewById(R.id.emptyHeading)
@@ -79,14 +83,16 @@ class FeedFragment: Fragment() {
 
   private fun refreshEvents() {
     this.swipeRefresh.isRefreshing = true
-    this.client.feed.getFeed()
+    this.client.feed.getFeed(forceCache = !haveInternetConnection)
+      .delay(2, TimeUnit.SECONDS)  // TODO: REMOVE ME
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(
         onSuccess = { events ->
           swipeRefresh.isRefreshing = false
           isEmptyMessageHidden = true
-          this.adapter = FeedAdapter(events, this::onEventSelected)
-          Timber.d("Events! $events")
+          activity?.let {
+            this.recycler.adapter = FeedAdapter(it, events, this::onEventSelected)
+          }
         },
         onError = { error ->
           swipeRefresh.isRefreshing = false
@@ -135,5 +141,10 @@ class FeedFragment: Fragment() {
     emptyHeading.text = heading
     emptySubheading.text = subHeading
     isEmptyMessageHidden = false
+  }
+
+  private val haveInternetConnection: Boolean get() {
+    val net = context?.connectivityManager?.activeNetworkInfo
+    return net != null && net.isConnectedOrConnecting
   }
 }
