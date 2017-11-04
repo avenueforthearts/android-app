@@ -4,6 +4,7 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import org.joda.time.DateTime
 
+@Suppress("unused")
 class TimestampConversion {
 
     @FromJson
