@@ -6,6 +6,7 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+        google()
     }
     dependencies {
         // https://developer.android.com/studio/releases/gradle-plugin.html
