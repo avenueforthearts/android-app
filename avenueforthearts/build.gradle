@@ -45,7 +45,7 @@ android {
             minifyEnabled false
             shrinkResources false
 
-            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/master/\""
+            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/eventParsing/\""
 
             resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"

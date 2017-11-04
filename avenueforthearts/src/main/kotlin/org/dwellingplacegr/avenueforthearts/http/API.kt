@@ -2,13 +2,13 @@ package org.dwellingplacegr.avenueforthearts.http
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import net.danlew.android.joda.JodaTimeAndroid
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.dwellingplacegr.avenueforthearts.BuildConfig
-import org.joda.time.DateTime
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -39,7 +39,11 @@ class API {
         )
 
       retrofitBuilder.addConverterFactory(
-        MoshiConverterFactory.create(Moshi.Builder().add(TimestampConversion()).build())
+        MoshiConverterFactory.create(Moshi.Builder()
+                .add(TimestampConversion())
+//                .add(EventJsonAdapter())
+//                .add(Types.newParameterizedType(List::class.java, EventJsonAdapter::class.java))
+                .build())
       )
 
       retrofitBuilder.build()
@@ -52,33 +56,6 @@ class API {
 
   interface Feed {
     @GET("events.json")
-    fun getFeed(): Single<List<Event>>
+    fun getFeed(): Single<Container>
   }
 }
-
-data class Events(
-  @Json(name="data")
-  val events: List<Events>
-)
-
-data class Location(
-  val city: String,
-  val country: String,
-  val latitude: Double,
-  val longitude: Double,
-  val state: String,
-  val street: String,
-  val zip: String //Should be int?
-)
-
-data class Event(
-  val name: String,
-  val description: String,
-  @Json(name="end_time")
-  val endTime: DateTime,
-  @Json(name="start_time")
-  val startTime: DateTime,
-  val id: String,
-  val location: Location
-
-)
