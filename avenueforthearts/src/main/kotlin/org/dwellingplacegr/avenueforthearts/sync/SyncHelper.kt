@@ -8,7 +8,7 @@ import org.dwellingplacegr.avenueforthearts.R
 import org.jetbrains.anko.accountManager
 
 object SyncHelper {
-  private const val ACCOUNT_NAME = "Sync"
+  private const val ACCOUNT_NAME = "Event Sync"
 
   @JvmStatic fun initializePeriodicSync(context: Context) {
     val account = Account(ACCOUNT_NAME, context.getString(R.string.account_type))

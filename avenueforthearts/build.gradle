@@ -45,6 +45,8 @@ android {
             minifyEnabled false
             shrinkResources false
 
+            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/master/\""
+
             resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
@@ -59,6 +61,8 @@ android {
             shrinkResources true
             debuggable false
             proguardFiles proGuardFileCollection.getFiles().toArray()
+
+            buildConfigField "String", "BASE_URL", "\"https://events.avenueforthearts.com\""
 
             resValue "string", "account_type", android.defaultConfig.applicationId
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
@@ -99,6 +103,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
 
     // Rx
     implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
