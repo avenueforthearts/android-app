@@ -44,6 +44,9 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
+
+            resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix
+            resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
         debugMinified.initWith(buildTypes.debug)
         debugMinified {
@@ -56,6 +59,9 @@ android {
             shrinkResources true
             debuggable false
             proguardFiles proGuardFileCollection.getFiles().toArray()
+
+            resValue "string", "account_type", android.defaultConfig.applicationId
+            resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
     }
 }

@@ -8,6 +8,7 @@ import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import org.dwellingplacegr.avenueforthearts.BuildConfig
 import net.danlew.android.joda.JodaTimeAndroid
+import org.dwellingplacegr.avenueforthearts.sync.SyncHelper
 import timber.log.Timber
 
 class App : MultiDexApplication() {
@@ -39,6 +40,8 @@ class App : MultiDexApplication() {
     Timber.plant(Timber.DebugTree())
 
     JodaTimeAndroid.init(this)
+
+    SyncHelper.initializePeriodicSync(this)
 
     if (BuildConfig.DEBUG) {
       StrictMode.setThreadPolicy(
