@@ -3,6 +3,8 @@ package org.dwellingplacegr.avenueforthearts.injection
 import org.dwellingplacegr.avenueforthearts.ui.MainActivity
 import dagger.Component
 import org.dwellingplacegr.avenueforthearts.sync.SyncAdapter
+import org.dwellingplacegr.avenueforthearts.ui.EventDetailFragment
+import org.dwellingplacegr.avenueforthearts.ui.FeedFragment
 import javax.inject.Singleton
 
 /**
@@ -20,6 +22,8 @@ import javax.inject.Singleton
 interface AppComponent {
   fun inject(application: App)
   fun inject(activity: MainActivity)
+  fun inject(fragment: EventDetailFragment)
+  fun inject(fragment: FeedFragment)
 
   fun inject(adapter: SyncAdapter)
 

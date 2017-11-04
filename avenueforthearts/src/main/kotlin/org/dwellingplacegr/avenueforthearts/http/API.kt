@@ -15,7 +15,7 @@ import timber.log.Timber
 
 
 class API {
-  class Client {
+  class Client(private val moshi: Moshi) {
     private val okClient: OkHttpClient by lazy {
       val loggingInterceptor = HttpLoggingInterceptor(
         HttpLoggingInterceptor.Logger { message ->
@@ -37,7 +37,7 @@ class API {
         )
 
       retrofitBuilder.addConverterFactory(
-        MoshiConverterFactory.create(Moshi.Builder().build())
+        MoshiConverterFactory.create(moshi)
       )
 
       retrofitBuilder.build()

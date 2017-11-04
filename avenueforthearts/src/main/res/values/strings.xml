@@ -3,4 +3,10 @@
     <string name="placeholder_darth_plagueis2">I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side, he could even keep the ones he cared about from dying.</string>
 
     <string name="app_name">Aveneue for the Arts</string>
+    <string name="title_event_detail">Event Detail</string>
+    <string name="error_check_network_connection">Please make sure you have an internet connection.</string>
+    <string name="error_swipe_to_reload">Swipe down from the top of the screen to reload.</string>
+    <string name="error_downloading_events">Sorry! We were unable to download events happening on the Avenue</string>
+    <string name="checking_out_whats_happening">Getting a list of events on the Avenue</string>
+    <string name="sit_tight">Sit tight...</string>
 </resources>

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="darkishBlue">#004785</color>
-    <color name="lightBlue">#7f004785</color>
-
-    <color name="divider">#3d000000</color>
-
-    <color name="load_path">@color/oceanBlue</color>
-    <color name="layover_path">@color/solid_gray_46</color>
-
+    <color name="avenueRed">#bc2a2c</color>
+    <color name="avenueDarkerRed">#880409</color>
     <color name="oceanBlue">#006ab5</color>
     <color name="boringGreen">#66bb6a</color>
     <color name="boringGreen_50">#7f66bb6a</color>
@@ -27,12 +21,10 @@
     <color name="gray_09">#16000000</color>
     <color name="pinkish_grey">#bbbbbb</color>
 
-    <color name="transparent">#00000000</color>
-
     <color name="bing_water_blue">#bed0e3</color>
 
-    <color name="colorPrimary">@color/oceanBlue</color>
-    <color name="colorPrimaryDark">@color/darkishBlue</color>
+    <color name="colorPrimary">@color/avenueRed</color>
+    <color name="colorPrimaryDark">@color/avenueDarkerRed</color>
     <color name="colorAccent">#FF4081</color>
 </resources>
 
