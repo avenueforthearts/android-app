@@ -22,10 +22,6 @@ class MainActivity : AppCompatActivity() {
     tabBar = findViewById(R.id.bottom_navigation)
 
     if (savedInstanceState == null) {
-//      val fragment = FeedFragment()
-//      supportFragmentManager.beginTransaction()
-//        .add(R.id.event_list_container, fragment)
-//        .commit()
       pager.adapter = TabsAdapter()
     }
 
@@ -39,11 +35,11 @@ class MainActivity : AppCompatActivity() {
       true
     }
 
-    pager.addOnPageChangeListener(object: ViewPager.SimpleOnPageChangeListener() {
-      override fun onPageSelected(position: Int) {
-        tabBar.menu.getItem(position).isChecked = true
-      }
-    })
+//    pager.addOnPageChangeListener(object: ViewPager.SimpleOnPageChangeListener() {
+//      override fun onPageSelected(position: Int) {
+//        tabBar.menu.getItem(position).isChecked = true
+//      }
+//    })
   }
 
   inner private class TabsAdapter: FragmentPagerAdapter(supportFragmentManager) {
