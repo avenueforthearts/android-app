@@ -1,16 +1,7 @@
 package org.dwellingplacegr.avenueforthearts.http
 
-import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
-import com.squareup.moshi.ToJson
 import org.joda.time.DateTime
-
-class EventJsonAdapter {
-    @FromJson
-    fun eventFromJson(event: Event): Event {
-        return event
-    }
-}
 
 data class Container(
     val data: List<Event>

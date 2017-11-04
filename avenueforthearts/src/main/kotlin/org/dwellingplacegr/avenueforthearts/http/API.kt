@@ -1,11 +1,8 @@
 package org.dwellingplacegr.avenueforthearts.http
 
-import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import net.danlew.android.joda.JodaTimeAndroid
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.dwellingplacegr.avenueforthearts.BuildConfig
@@ -41,8 +38,6 @@ class API {
       retrofitBuilder.addConverterFactory(
         MoshiConverterFactory.create(Moshi.Builder()
                 .add(TimestampConversion())
-//                .add(EventJsonAdapter())
-//                .add(Types.newParameterizedType(List::class.java, EventJsonAdapter::class.java))
                 .build())
       )
 
