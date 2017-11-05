@@ -45,15 +45,15 @@
                 tools:visibility="visible"
                 >
 
-                <!--<android.support.v7.widget.AppCompatImageView-->
-                    <!--android:id="@+id/loadingImage"-->
-                    <!--android:layout_width="250dp"-->
-                    <!--android:layout_height="250dp"-->
-                    <!--app:srcCompat="@drawable/ic_avenue_logo_primary"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_marginBottom="16dp"-->
-                    <!--tools:ignore="ContentDescription"-->
-                    <!--/>-->
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/loadingImage"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/ic_avenue_logo_primary"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    tools:ignore="ContentDescription"
+                    />
 
                 <TextView
                     android:id="@+id/emptyHeading"
