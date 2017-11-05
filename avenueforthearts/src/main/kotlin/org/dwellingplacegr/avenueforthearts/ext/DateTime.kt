@@ -17,6 +17,10 @@ inline val Int.years get() = Years.years(this)
 @Suppress("NOTHING_TO_INLINE")
 inline fun now() = DateTime.now()
 
+inline fun DateTime.isSameDayAs(other: DateTime): Boolean {
+  return this.withTimeAtStartOfDay() == other.withTimeAtStartOfDay()
+}
+
 private val FMT_ISO_8601_uS = DateTimeFormat
   .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ")
   .withLocale(Locale.US)

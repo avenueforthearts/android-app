@@ -28,7 +28,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import org.dwellingplacegr.avenueforthearts.ext.android.isGone
-import org.joda.time.DateTime
+import org.dwellingplacegr.avenueforthearts.ext.isSameDayAs
 import org.joda.time.format.DateTimeFormat
 import timber.log.Timber
 
@@ -97,7 +97,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
     }
     this.location.text = event.placeName
 
-    this.dateAndTime.text = getDateString(event.startTime, event.endTime)
+    this.dateAndTime.text = formatEventDate(event)
 
     val backdrop = view?.findViewById<ImageView>(R.id.backdrop) ?: return
     val cover = event.cover
@@ -184,33 +184,30 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
     val openInFacebook = container.findViewById<View>(R.id.visitFbPage)
     openInFacebook.setOnClickListener { openInFacebook() }
+
+    val shareEvent = container.findViewById<View>(R.id.shareEvent)
+    shareEvent.setOnClickListener { shareEvent() }
   }
 
-  private fun getDateString(start: DateTime, end: DateTime?): String {
-    val startDateStr = dateFormatter.print(start)
-    val startTimeStr = timeFormatter.print(start)
+  private fun formatEventDate(event: Event): String {
+    val startDateStr = dateFormatter.print(event.startTime)
+    val startTimeStr = timeFormatter.print(event.startTime)
     val startStr = getString(R.string.long_datetime_format, startDateStr, startTimeStr)
 
-    val endStr = end?.let { end ->
-      val endTimeStr = timeFormatter.print(end)
-      if (start.withTimeAtStartOfDay() == end.withTimeAtStartOfDay()) {
-        endTimeStr
-      } else {
-        val endDateStr = dateFormatter.print(end)
-        getString(R.string.long_datetime_format, endDateStr, endTimeStr)
-      }
+    val endTimeStr = timeFormatter.print(event.endTime) as String
+    val endStr = if (event.startTime.isSameDayAs(event.endTime)) {
+      endTimeStr
+    } else {
+      val endDateStr = dateFormatter.print(event.endTime)
+      getString(R.string.long_datetime_format, endDateStr, endTimeStr)
     }
 
-    return if (endStr != null) {
-      getString(R.string.time_range_format, startStr, endStr)
-    } else {
-      startStr
-    }
+    return getString(R.string.time_range_format, startStr, endStr)
   }
 
-  private fun getTimeString(start: DateTime, end: DateTime): String {
-    val startTimeStr = timeFormatter.print(start)
-    val endTimeStr = timeFormatter.print(end)
+  private fun getTimeString(event: Event): String {
+    val startTimeStr = timeFormatter.print(event.startTime)
+    val endTimeStr = timeFormatter.print(event.endTime)
     return getString(R.string.time_range_format, startTimeStr, endTimeStr)
   }
 
@@ -228,16 +225,37 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
   private fun openInFacebook() {
     val intent = Intent(Intent.ACTION_VIEW)
-    intent.data = event.url
+    intent.data = activity?.packageManager?.let { pm ->
+      try {
+        // Check if we can open in facebook app
+        // https://stackoverflow.com/a/34564284/1255482
+        val pi = pm.getPackageInfo("com.facebook.katana", 0)
+        val ai = pm.getApplicationInfo("com.facebook.katana", 0)
+        if (ai.enabled && pi.versionCode > 3002850) {
+          Uri.parse("fb://facewebmodal/f?href=${event.url}")
+        } else {
+          event.url
+        }
+      } catch (e: Exception) {
+        event.url
+      }
+    } ?: event.url
     startActivity(intent)
   }
 
   private fun shareEvent() {
     val sharingIntent = Intent(Intent.ACTION_SEND)
     sharingIntent.type = "text/plain"
-    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, event.name)
-    sharingIntent.putExtra(Intent.EXTRA_TEXT, event.description)
-//    sharingIntent.putExtra(Intent.EXTRA_, event.description)
+    val nameAndLocation = getString(R.string.share_name_loc, event.name, event.placeName)
+    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, nameAndLocation)
+    val descAndLink = getString(
+      R.string.share_text,
+      event.name,
+      event.placeName,
+      formatEventDate(event),
+      event.url.toString()
+    )
+    sharingIntent.putExtra(Intent.EXTRA_TEXT, descAndLink)
     startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_with)))
   }
 }

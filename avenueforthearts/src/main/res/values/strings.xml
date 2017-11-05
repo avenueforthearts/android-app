@@ -19,4 +19,6 @@
     <string name="button_visit">Visit</string>
     <string name="button_share">Share</string>
     <string name="share_with">Share with…</string>
+    <string name="share_name_loc">%1$s at %2$s</string>
+    <string name="share_text">Check out \"%1$s\" happening at %2$s (%3$s): %4$s</string>
 </resources>
