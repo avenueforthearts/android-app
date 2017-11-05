@@ -27,6 +27,9 @@
                 app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/feed_item"
                 tools:visibility="gone"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:clipToPadding="false"
                 />
 
             <LinearLayout

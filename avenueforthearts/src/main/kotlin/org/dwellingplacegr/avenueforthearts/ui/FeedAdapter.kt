@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
+import io.reactivex.subjects.PublishSubject
 import org.dwellingplacegr.avenueforthearts.R
 import org.dwellingplacegr.avenueforthearts.ext.android.isGone
 import org.dwellingplacegr.avenueforthearts.http.Event
@@ -14,11 +15,12 @@ import org.joda.time.format.DateTimeFormat
 
 class FeedAdapter(
   private val context: Context,
-  private val items: List<Event>,
-  private val onClick: (Event) -> Unit
+  private val items: List<Event>
 ): RecyclerView.Adapter<FeedItemViewHolder>() {
   val dateFormatter = DateTimeFormat.forPattern(context.getString(R.string.month_day_format))
   val timeFormatter = DateTimeFormat.shortTime()
+
+  val selections = PublishSubject.create<Event>()
 
   override fun getItemCount(): Int {
     return items.size
@@ -33,10 +35,11 @@ class FeedAdapter(
   override fun onBindViewHolder(holder: FeedItemViewHolder, position: Int) {
     val event = items[holder.adapterPosition]
     holder.title.text = event.name
+    holder.location.text = event.place.name
     holder.description.text = cleanupDescription(event.description)
     holder.location.text = event.place.name
     holder.dateAndTime.text = getTimeString(event.startTime, event.endTime)
-    holder.card.setOnClickListener { onClick(event) }
+    holder.card.setOnClickListener { selections.onNext(event) }
 
 
     if (event.cover != null) {

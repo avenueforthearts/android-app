@@ -11,7 +11,7 @@ data class Event(
   val cover: CovfefePhoto?,
 
   @Json(name="end_time")
-  val endTime: DateTime?,
+  val endTime: DateTime,
 
   @Json(name="start_time")
   val startTime: DateTime

@@ -13,12 +13,4 @@
 
     <dimen name="min_clickable_height">48dp</dimen>
 
-    <dimen name="filter_peek_plus_shadow_height">48dp</dimen>
-    <dimen name="filter_peek_height">44dp</dimen>
-    <dimen name="shadow_height">4dp</dimen>
-
-    <dimen name="mapview_padding_horizontal">50dp</dimen>
-    <dimen name="mapview_padding_top">50dp</dimen>
-    <dimen name="mapview_padding_bottom">20dp</dimen>
-    <dimen name="mapview_line_thickness">1dp</dimen>
 </resources>

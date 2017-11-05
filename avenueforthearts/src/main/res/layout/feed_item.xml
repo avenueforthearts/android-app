@@ -10,8 +10,10 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:cardElevation="4dp"
         >
 
@@ -21,7 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:clickable="true"
-            android:background="?attr/selectableItemBackground"
+            android:foreground="?attr/selectableItemBackground"
             android:focusable="true"
             >
 
@@ -39,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginBottom="8dp"
                 >
 
@@ -48,36 +50,46 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/placeholder_darth_plagueis1"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_marginBottom="4dp"
-                    />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/placeholder_darth_plagueis2"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_marginBottom="4dp"
-                    android:maxLines="3"
-                    android:ellipsize="end"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    tools:text="@string/placeholder_darth_plagueis1"
                     />
 
                 <TextView
                     android:id="@+id/dateAndTime"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Nov 10, 1:00 PM - Nov 10, 3:00 PM"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/avenueDarkerRed"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    tools:text="Mon, Oct 31 at 12:30 PM - 9:00 PM"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     style="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/avenueDarkerRed"
+                    android:drawableStart="@android:drawable/ic_dialog_alert"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    tools:text="@string/placeholder_darth_plagueis1"
+                    android:drawableTint="@color/colorPrimary"
                     />
 
                 <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Sanctuary Folk Art Gallery"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColorLink="@color/avenueDarkerRed"
+                    tools:text="@string/placeholder_darth_plagueis2"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     />
 
             </LinearLayout>

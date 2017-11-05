@@ -15,11 +15,12 @@
         <item name="android:textColorSecondary">@color/gray_38</item>
     </style>
 
-    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="colorAccent">@color/oceanBlue</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-    </style>
+    <style name="AppTheme.Event" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
+    </style>
     <style name="AppTheme.TextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/oceanBlue</item>
     </style>

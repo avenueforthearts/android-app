@@ -15,4 +15,7 @@
     <string name="content_desc_event_cover_photo">Event cover photo</string>
     <string name="bar_item_events">Events</string>
     <string name="bar_item_map">Map</string>
+    <string name="button_add">Add</string>
+    <string name="button_visit">Visit</string>
+    <string name="button_share">Share</string>
 </resources>

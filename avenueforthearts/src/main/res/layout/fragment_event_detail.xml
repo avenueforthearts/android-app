@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/background_light"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     >
 
     <android.support.design.widget.AppBarLayout
@@ -60,29 +60,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp"
             >
 
-            <TextView
-                android:id="@+id/head"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:lineSpacingExtra="8dp"
-                tools:text="@string/placeholder_darth_plagueis1"
-                android:padding="@dimen/activity_horizontal_margin"
-                />
+                android:orientation="vertical"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                >
 
-            <TextView
-                android:id="@+id/sub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:autoLink="all"
-                android:textColorLink="@color/avenueDarkerRed"
-                tools:text="@string/placeholder_darth_plagueis2"
-                android:padding="@dimen/activity_horizontal_margin"
-                />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    tools:text="@string/placeholder_darth_plagueis1"
+                    />
+
+                <TextView
+                    android:id="@+id/dateAndTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/avenueDarkerRed"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    tools:text="Mon, Oct 31 at 12:30 PM - 9:00 PM"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/avenueDarkerRed"
+                    android:drawableStart="@android:drawable/ic_dialog_alert"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    tools:text="@string/placeholder_darth_plagueis1"
+                    android:drawableTint="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:autoLink="all"
+                    android:textColorLink="@color/avenueDarkerRed"
+                    android:lineSpacingExtra="2dp"
+                    tools:text="@string/placeholder_darth_plagueis2"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    />
+
+            </LinearLayout>
+
+            <include layout="@layout/action_buttons" />
 
             <FrameLayout
                 android:id="@+id/mapContainer"

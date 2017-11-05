@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.squareup.moshi.Moshi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import org.dwellingplacegr.avenueforthearts.R
@@ -44,6 +45,7 @@ class FeedFragment: Fragment() {
   private lateinit var emptyHeading: TextView
   private lateinit var emptySubheading: TextView
   private var susbscribers = CompositeDisposable()
+  private var selectionSubscriber: Disposable? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.fragment_feed, container, false)
@@ -84,14 +86,20 @@ class FeedFragment: Fragment() {
   private fun refreshEvents() {
     this.swipeRefresh.isRefreshing = true
     this.client.feed.getFeed(forceCache = !haveInternetConnection)
-      .delay(2, TimeUnit.SECONDS)  // TODO: REMOVE ME
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(
         onSuccess = { events ->
           swipeRefresh.isRefreshing = false
           isEmptyMessageHidden = true
           activity?.let {
-            this.recycler.adapter = FeedAdapter(it, events, this::onEventSelected)
+            val adapter = FeedAdapter(it, events)
+            this.recycler.adapter = adapter
+
+            selectionSubscriber?.dispose()
+            selectionSubscriber = adapter.selections
+              .doOnNext { Timber.d("CLICK") }
+              .throttleFirst(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+              .subscribe(this::onEventSelected)
           }
         },
         onError = { error ->
