@@ -155,14 +155,15 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
     val marker = MarkerOptions().position(placemark).title(event.placeName)
     map.addMarker(marker)
+    val zoom = 16f
     val cameraPosition = CameraPosition.builder()
       .target(placemark)
-      .zoom(16f)
+      .zoom(zoom)
       .build()
     map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
     map.setOnMapClickListener { _ ->
-      val uri = Uri.parse("geo:${placemark.latitude},${placemark.longitude}?z=17&q=${marker.title}")
+      val uri = Uri.parse("geo:${placemark.latitude},${placemark.longitude}?z=$zoom&q=${marker.title}")
       val mapIntent = Intent(Intent.ACTION_VIEW, uri)
       startActivity(mapIntent)
     }
@@ -253,7 +254,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
       event.name,
       event.placeName,
       formatEventDate(event),
-      event.url.toString()
+      event.friendlyUrl
     )
     sharingIntent.putExtra(Intent.EXTRA_TEXT, descAndLink)
     startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_with)))

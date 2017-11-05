@@ -35,6 +35,9 @@ data class Event(
   val url: Uri get() {
     return Uri.parse("https://facebook.com/events/$id")
   }
+  val friendlyUrl: String get() {
+    return "facebook.com/events/$id"
+  }
 
   val location: LatLng? get() {
     return if (latitude != null && longitude != null) {

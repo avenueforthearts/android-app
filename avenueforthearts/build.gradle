@@ -135,6 +135,8 @@ dependencies {
     // Images
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
+
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true;
     }
