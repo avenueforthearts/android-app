@@ -89,8 +89,13 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
     bindViews(view!!)
 
     this.title.text = event.name
-    this.description.text = event.description.replace("\\s+", " ")
-    this.location.text = event.place.name
+    if (event.description.isNullOrEmpty()) {
+      this.description.isGone = true
+    } else {
+      this.description.isGone = false
+      this.description.text = event.description?.replace("\\s+", " ")
+    }
+    this.location.text = event.placeName
 
     this.dateAndTime.text = getDateString(event.startTime, event.endTime)
 
@@ -99,7 +104,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
     if (cover != null) {
       Picasso.with(activity)
-        .load(cover.source)
+        .load(cover)
         .into(backdrop)
     } else {
       backdrop.isGone = true
@@ -127,30 +132,28 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   }
 
   override fun onMapReady(map: GoogleMap) {
-    val location = event.place.location
-    val placemark = if (location != null) {
-      LatLng(location.latitude, location.longitude)
-    } else {
+    val location = event.location
+    val placemark = location ?: {
       try {
         val geocoder = Geocoder(context)
-        val address = geocoder.getFromLocationName(event.place.name, 1).firstOrNull()
+        val address = geocoder.getFromLocationName(event.placeName, 1).firstOrNull()
         address?.let { LatLng(it.latitude, it.longitude) }
       } catch (e: Exception) {
         // Just in case
         Timber.e(e)
         null
       }
-    }
+    }()
 
     if (placemark == null) {
-      Timber.e("Could not geocode '${event.place.name}'")
+      Timber.e("Could not geocode '${event.placeName}'")
       return
     }
 
     mapContainer.isGone = false
     map.uiSettings.setAllGesturesEnabled(false)
 
-    val marker = MarkerOptions().position(placemark).title(event.place.name)
+    val marker = MarkerOptions().position(placemark).title(event.placeName)
     map.addMarker(marker)
     val cameraPosition = CameraPosition.builder()
       .target(placemark)
@@ -178,6 +181,9 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
     val calendarButton = container.findViewById<View>(R.id.addToCalendar)
     calendarButton.setOnClickListener { addEventToCalendar() }
+
+    val openInFacebook = container.findViewById<View>(R.id.visitFbPage)
+    openInFacebook.setOnClickListener { openInFacebook() }
   }
 
   private fun getDateString(start: DateTime, end: DateTime?): String {
@@ -215,12 +221,23 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
       .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.endTime.millis)
       .putExtra(CalendarContract.Events.TITLE, event.name)
       .putExtra(CalendarContract.Events.DESCRIPTION, event.description)
-      .putExtra(CalendarContract.Events.EVENT_LOCATION, event.place.name)
+      .putExtra(CalendarContract.Events.EVENT_LOCATION, event.placeName)
       .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
     startActivity(intent)
   }
 
-  private fun shareEvent() {
+  private fun openInFacebook() {
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = event.url
+    startActivity(intent)
+  }
 
+  private fun shareEvent() {
+    val sharingIntent = Intent(Intent.ACTION_SEND)
+    sharingIntent.type = "text/plain"
+    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, event.name)
+    sharingIntent.putExtra(Intent.EXTRA_TEXT, event.description)
+//    sharingIntent.putExtra(Intent.EXTRA_, event.description)
+    startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_with)))
   }
 }

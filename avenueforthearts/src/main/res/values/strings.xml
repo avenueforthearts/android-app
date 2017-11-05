@@ -18,4 +18,5 @@
     <string name="button_add">Add</string>
     <string name="button_visit">Visit</string>
     <string name="button_share">Share</string>
+    <string name="share_with">Share with…</string>
 </resources>

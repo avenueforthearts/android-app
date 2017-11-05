@@ -35,9 +35,13 @@ class FeedAdapter(
   override fun onBindViewHolder(holder: FeedItemViewHolder, position: Int) {
     val event = items[holder.adapterPosition]
     holder.title.text = event.name
-    holder.location.text = event.place.name
-    holder.description.text = cleanupDescription(event.description)
-    holder.location.text = event.place.name
+    holder.location.text = event.placeName
+    if (event.description.isNullOrEmpty()) {
+      holder.description.isGone = true
+    } else {
+      holder.description.text = cleanupDescription(event.description!!)
+      holder.description.isGone = false
+    }
     holder.dateAndTime.text = getTimeString(event.startTime, event.endTime)
     holder.card.setOnClickListener { selections.onNext(event) }
 
@@ -45,7 +49,7 @@ class FeedAdapter(
     if (event.cover != null) {
       holder.image.isGone = false
       Picasso.with(context)
-        .load(event.cover.source)
+        .load(event.cover)
         .into(holder.image)
     } else {
       holder.image.isGone = true
