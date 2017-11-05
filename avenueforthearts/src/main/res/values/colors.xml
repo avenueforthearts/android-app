@@ -32,6 +32,7 @@
     <color name="colorPrimaryDark">@color/avenueDarkerRed</color>
     <color name="secondary">@color/pms877</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="text_color_body">#cc000000</color>
 
     <array name="swipeRefreshColors">
         <item>@color/colorPrimary</item>

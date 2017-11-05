@@ -53,6 +53,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     style="@style/TextAppearance.AppCompat.Title"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/gill_sans"
                     tools:text="@string/placeholder_darth_plagueis1"
                     />
 
@@ -61,8 +63,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/avenueDarkerRed"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/colorPrimary"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:fontFamily="@font/gill_sans"
                     tools:text="Mon, Oct 31 at 12:30 PM - 9:00 PM"
                     />
 
@@ -70,13 +73,15 @@
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:textColor="@color/avenueDarkerRed"
-                    android:drawableStart="@android:drawable/ic_dialog_alert"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:textStyle=""
+                    android:fontFamily="@font/gill_sans"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableStart="@drawable/ic_pin"
                     android:drawablePadding="8dp"
+                    android:layout_marginStart="-8dp"
                     android:gravity="center_vertical"
                     tools:text="@string/placeholder_darth_plagueis1"
-                    android:drawableTint="@color/colorPrimary"
                     />
 
                 <TextView
@@ -87,7 +92,9 @@
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:textColorLink="@color/avenueDarkerRed"
+                    android:textColor="@color/text_color_body"
                     tools:text="@string/placeholder_darth_plagueis2"
+                    android:fontFamily="@font/gill_sans"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     />

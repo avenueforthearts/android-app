@@ -29,6 +29,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
 
     dexOptions {

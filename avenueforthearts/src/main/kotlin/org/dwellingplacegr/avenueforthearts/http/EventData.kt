@@ -3,6 +3,10 @@ package org.dwellingplacegr.avenueforthearts.http
 import android.net.Uri
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.moshi.Json
+import org.dwellingplacegr.avenueforthearts.ext.DateTimeRange
+import org.dwellingplacegr.avenueforthearts.ext.days
+import org.dwellingplacegr.avenueforthearts.ext.isSameDayAs
+import org.dwellingplacegr.avenueforthearts.ext.now
 import org.joda.time.DateTime
 
 data class Event(
@@ -13,7 +17,7 @@ data class Event(
   @Json(name="start_time")
   val startTime: DateTime,
   @Json(name="end_time")
-  val endTime: DateTime,
+  val endTime: DateTime?,
 
   @Json(name = "place_name")
   val placeName: String,
@@ -43,6 +47,17 @@ data class Event(
     return if (latitude != null && longitude != null) {
       LatLng(latitude, longitude)
     } else { null }
+  }
+
+  fun happensOnDate(date: DateTime): Boolean {
+    val start = date.withTimeAtStartOfDay()
+    val end = (date + 1.days).withTimeAtStartOfDay()
+    return if (this.endTime != null) {
+      this.startTime.withTimeAtStartOfDay() <= start
+        && this.startTime.withTimeAtStartOfDay() < end
+    } else {
+      this.startTime >= start && this.startTime < end
+    }
   }
 }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/gillsans"
+        app:fontStyle="normal"
+        app:fontWeight="400"
+        app:font="@font/gillsans" />
+
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/gillsans_italic"
+        app:fontStyle="italic"
+        app:fontWeight="400"
+        app:font="@font/gillsans_italic" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="800"
+        android:font="@font/gillsans_bold"
+        app:fontStyle="normal"
+        app:fontWeight="700"
+        app:font="@font/gillsans_bold" />
+
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="800"
+        android:font="@font/gillsans_bolditalic"
+        app:fontStyle="normal"
+        app:fontWeight="700"
+        app:font="@font/gillsans_bolditalic" />
+
+</font-family>

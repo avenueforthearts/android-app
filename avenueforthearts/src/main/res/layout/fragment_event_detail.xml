@@ -44,6 +44,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:collapsedTitleGravity="center_vertical"
+                android:fontFamily="@font/gill_sans"
                 />
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -77,6 +78,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     style="@style/TextAppearance.AppCompat.Title"
+                    android:fontFamily="@font/gill_sans"
+                    android:textStyle="bold"
                     tools:text="@string/placeholder_darth_plagueis1"
                     />
 
@@ -85,8 +88,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textColor="@color/avenueDarkerRed"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/gill_sans"
+                    style="@style/TextAppearance.AppCompat.Caption"
                     tools:text="Mon, Oct 31 at 12:30 PM - 9:00 PM"
                     />
 
@@ -94,13 +98,15 @@
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:textColor="@color/avenueDarkerRed"
-                    android:drawableStart="@android:drawable/ic_dialog_alert"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:textStyle=""
+                    android:fontFamily="@font/gill_sans"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableStart="@drawable/ic_pin"
                     android:drawablePadding="8dp"
+                    android:layout_marginStart="-8dp"
                     android:gravity="center_vertical"
                     tools:text="@string/placeholder_darth_plagueis1"
-                    android:drawableTint="@color/colorPrimary"
                     />
 
                 <TextView
@@ -110,7 +116,10 @@
                     android:textSize="14sp"
                     android:autoLink="all"
                     android:textColorLink="@color/avenueDarkerRed"
-                    android:lineSpacingExtra="2dp"
+                    android:textColor="@color/text_color_body"
+                    android:fontFamily="@font/gill_sans"
+                    android:lineSpacingExtra="2sp"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     tools:text="@string/placeholder_darth_plagueis2"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"

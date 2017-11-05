@@ -29,6 +29,7 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import org.dwellingplacegr.avenueforthearts.ext.android.isGone
 import org.dwellingplacegr.avenueforthearts.ext.isSameDayAs
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import timber.log.Timber
 
@@ -102,13 +103,13 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
     val backdrop = view?.findViewById<ImageView>(R.id.backdrop) ?: return
     val cover = event.cover
 
-    if (cover != null) {
+    if (cover.isNullOrEmpty()) {
+      backdrop.isGone = true
+      appBar.setExpanded(false)
+    } else {
       Picasso.with(activity)
         .load(cover)
         .into(backdrop)
-    } else {
-      backdrop.isGone = true
-      appBar.setExpanded(false)
     }
 
     val collapsingToolbarLayout = view!!.findViewById<CollapsingToolbarLayout>(R.id.collapsingToolbarLayout)
@@ -192,35 +193,39 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
 
   private fun formatEventDate(event: Event): String {
     val startDateStr = dateFormatter.print(event.startTime)
-    val startTimeStr = timeFormatter.print(event.startTime)
+    val startTimeStr = timeFormatter.print(event.endTime)
     val startStr = getString(R.string.long_datetime_format, startDateStr, startTimeStr)
 
-    val endTimeStr = timeFormatter.print(event.endTime) as String
-    val endStr = if (event.startTime.isSameDayAs(event.endTime)) {
-      endTimeStr
-    } else {
-      val endDateStr = dateFormatter.print(event.endTime)
-      getString(R.string.long_datetime_format, endDateStr, endTimeStr)
+    val endStr = event.endTime?.let { end ->
+      val endTimeStr = timeFormatter.print(end)
+      if (event.startTime.isSameDayAs(end)) {
+        endTimeStr
+      } else {
+        val endDateStr = dateFormatter.print(end)
+        getString(R.string.long_datetime_format, endDateStr, endTimeStr)
+      }
     }
 
-    return getString(R.string.time_range_format, startStr, endStr)
-  }
-
-  private fun getTimeString(event: Event): String {
-    val startTimeStr = timeFormatter.print(event.startTime)
-    val endTimeStr = timeFormatter.print(event.endTime)
-    return getString(R.string.time_range_format, startTimeStr, endTimeStr)
+    return if (endStr != null) {
+      getString(R.string.time_range_format, startStr, endStr)
+    } else {
+      startStr
+    }
   }
 
   private fun addEventToCalendar() {
     val intent = Intent(Intent.ACTION_INSERT)
       .setData(CalendarContract.Events.CONTENT_URI)
       .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.startTime.millis)
-      .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.endTime.millis)
       .putExtra(CalendarContract.Events.TITLE, event.name)
       .putExtra(CalendarContract.Events.DESCRIPTION, event.description)
       .putExtra(CalendarContract.Events.EVENT_LOCATION, event.placeName)
       .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+
+    event.endTime?.let { end ->
+      // TODO does calendar app allow this????
+      intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end.millis)
+    }
     startActivity(intent)
   }
 

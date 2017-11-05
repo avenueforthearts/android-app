@@ -1,7 +1,5 @@
 package org.dwellingplacegr.avenueforthearts.ui
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -9,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.moshi.Moshi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +16,9 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import org.dwellingplacegr.avenueforthearts.R
 import org.dwellingplacegr.avenueforthearts.ext.android.isGone
+import org.dwellingplacegr.avenueforthearts.ext.days
 import org.dwellingplacegr.avenueforthearts.ext.dump
+import org.dwellingplacegr.avenueforthearts.ext.now
 import org.dwellingplacegr.avenueforthearts.http.API
 import org.dwellingplacegr.avenueforthearts.http.Event
 import org.dwellingplacegr.avenueforthearts.injection.App
@@ -28,6 +27,7 @@ import org.jetbrains.anko.connectivityManager
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.annotations.Nls
+import org.joda.time.DateTime
 import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -87,6 +87,19 @@ class FeedFragment: Fragment() {
     this.swipeRefresh.isRefreshing = true
     this.client.feed.getFeed(forceCache = !haveInternetConnection)
       .observeOn(AndroidSchedulers.mainThread())
+      .map { events ->
+        val today = now().withTimeAtStartOfDay()
+        val tomorrow = today + 1.days
+        val todayEvents = events.filter { it.happensOnDate(today) }
+        val tomorrowEvents = events.filter { it.happensOnDate(tomorrow) && !it.happensOnDate(today) }
+        val futureEvents = events.filter { !it.happensOnDate(tomorrow) && !it.happensOnDate(today) }
+
+        listOf(
+          (getString(R.string.section_today) to today) to todayEvents,
+          (getString(R.string.section_tomorrow) to tomorrow) to tomorrowEvents,
+          (getString(R.string.section_upcoming) to null) to futureEvents
+        )
+      }
       .subscribeBy(
         onSuccess = { events ->
           swipeRefresh.isRefreshing = false
@@ -97,7 +110,6 @@ class FeedFragment: Fragment() {
 
             selectionSubscriber?.dispose()
             selectionSubscriber = adapter.selections
-              .doOnNext { Timber.d("CLICK") }
               .throttleFirst(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
               .subscribe(this::onEventSelected)
           }

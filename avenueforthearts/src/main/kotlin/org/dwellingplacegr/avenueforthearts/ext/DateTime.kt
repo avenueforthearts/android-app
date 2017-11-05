@@ -43,3 +43,7 @@ data class DateTimeRange(val start: DateTime, val end: DateTime) {
 infix fun DateTime.rangeTo(end: DateTime): DateTimeRange {
   return DateTimeRange(this, end)
 }
+//
+//infix fun DateTime.greaterThan(other: DateTime): Boolean {
+//  return
+//}

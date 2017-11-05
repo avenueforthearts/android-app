@@ -21,4 +21,8 @@
     <string name="share_with">Share with…</string>
     <string name="share_name_loc">%1$s at %2$s</string>
     <string name="share_text">Check out \"%1$s\" happening at %2$s (%3$s): %4$s</string>
+    <string name="header_date_format">MMMM d</string>
+    <string name="section_today">Today</string>
+    <string name="section_upcoming">Upcoming</string>
+    <string name="section_tomorrow">Tomorrow</string>
 </resources>
