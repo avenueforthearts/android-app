@@ -52,7 +52,7 @@ class API {
 
   class Feed internal constructor(private val endpoint: Feed.Endpoint) {
     internal interface Endpoint {
-      @GET("events")
+      @GET("events/")
       fun getFeed(
         @Header("Cache-Control") cacheControl: CacheControl?
       ): Single<List<Event>>

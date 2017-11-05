@@ -3,10 +3,11 @@ def password = getPassword("org.dwellingplacegr.avenueforthearts")
 android {
     signingConfigs {
         release {
-            storeFile file("$rootProject.projectDir/avenueforthearts/config/signing/lmax.jks")
+            storeFile file("$rootProject.projectDir/avenueforthearts/config/signing/avenueforthearts.jks")
             storePassword password
             keyAlias 'avenueforthearts'
             keyPassword password
+            v2SigningEnabled true
         }
     }
 

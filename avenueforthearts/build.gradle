@@ -46,7 +46,6 @@ android {
             minifyEnabled false
             shrinkResources false
 
-//            buildConfigField "String", "BASE_URL", "\"https://raw.githubusercontent.com/avenueforthearts/android-app/master/\""
             buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com/\""
             buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.96264625711024%2C-85.6686170667308&z=14\""
 
@@ -66,7 +65,9 @@ android {
             debuggable false
             proguardFiles proGuardFileCollection.getFiles().toArray()
 
-            buildConfigField "String", "BASE_URL", "\"https://events.avenueforthearts.com\""
+            resValue "string", "google_maps_key_res", "AIzaSyB1hplCqdjLnn6I6HgQL4Luzw0Wu1iTev8"
+            buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com\""
+            buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.96264625711024%2C-85.6686170667308&z=14\""
 
             resValue "string", "account_type", android.defaultConfig.applicationId
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
