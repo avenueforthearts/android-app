@@ -49,7 +49,7 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com/\""
             buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.95960771248584%2C-85.66844540535385&z=16\""
 
-            resValue "string", "google_maps_key_res", "AIzaSyB1hplCqdjLnn6I6HgQL4Luzw0Wu1iTev8"
+            resValue "string", "google_maps_key_res", "AIzaSyD6N_6-RoBEtKo9eXu3op8kS2sIgy-0Czk"
             resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
@@ -60,15 +60,15 @@ android {
             proguardFiles proGuardFileCollection.getFiles().toArray()
         }
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             debuggable false
             proguardFiles proGuardFileCollection.getFiles().toArray()
 
             buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com\""
             buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.95960771248584%2C-85.66844540535385&z=16\""
 
-            resValue "string", "google_maps_key_res", "AIzaSyB1hplCqdjLnn6I6HgQL4Luzw0Wu1iTev8"
+            resValue "string", "google_maps_key_res", "AIzaSyDS0inkMeNebXpFylzXw9y_TQndNRFUJqs"
             resValue "string", "account_type", android.defaultConfig.applicationId
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
@@ -90,9 +90,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:multidex:1.0.2'
-    def gmsVersion = "11.4.2"
-    implementation "com.google.android.gms:play-services:$gmsVersion"
-    implementation "com.google.android.gms:play-services-maps:$gmsVersion"
+    implementation "com.google.android.gms:play-services-maps:11.4.2"
 
     // Dependency injection
     def daggerVersion = "2.12"
@@ -119,14 +117,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    def rxBindingVersion = "2.0.0"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:$rxBindingVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingVersion"
-    implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.mtramin:rxfingerprint:2.1.0'
 
     // Logging
     implementation 'com.jakewharton.timber:timber:4.5.1'
@@ -143,5 +133,3 @@ dependencies {
         transitive = true;
     }
 }
-
-apply plugin: 'kotlin-android-extensions'

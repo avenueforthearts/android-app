@@ -45,14 +45,11 @@ class FeedAdapter(
     holder.dateAndTime.text = getTimeString(event.startTime, event.endTime)
     holder.card.setOnClickListener { selections.onNext(event) }
 
-
-    if (event.cover.isNullOrEmpty()) {
-      holder.image.isGone = true
-
-    } else {
+    if (!event.cover.isNullOrEmpty()) {
       holder.image.isGone = false
       Picasso.with(context)
         .load(event.cover)
+        .error(R.drawable.placeholder)
         .into(holder.image)
     }
   }

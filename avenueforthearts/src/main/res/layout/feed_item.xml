@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/happytrails"
+                android:src="@drawable/placeholder"
                 android:contentDescription="@string/content_desc_event_cover_photo"
                 android:layout_marginBottom="8dp"
                 />

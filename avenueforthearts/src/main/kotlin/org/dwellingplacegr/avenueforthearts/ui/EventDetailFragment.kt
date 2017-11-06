@@ -60,6 +60,8 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.fragment_event_detail, container, false)
 
+    bindViews(view)
+
     App.graph.inject(this)
 
     val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
@@ -87,8 +89,6 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   override fun onResume() {
     super.onResume()
 
-    bindViews(view!!)
-
     this.title.text = event.name
     if (event.description.isNullOrEmpty()) {
       this.description.isGone = true
@@ -103,12 +103,10 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
     val backdrop = view?.findViewById<ImageView>(R.id.backdrop) ?: return
     val cover = event.cover
 
-    if (cover.isNullOrEmpty()) {
-      backdrop.isGone = true
-      appBar.setExpanded(false)
-    } else {
+    if (!cover.isNullOrEmpty()) {
       Picasso.with(activity)
         .load(cover)
+        .error(R.drawable.placeholder)
         .into(backdrop)
     }
 

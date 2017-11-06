@@ -1,0 +1,1 @@
+-keep class org.dwellingplacegr.avenueforthearts.http.** { *; }
