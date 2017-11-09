@@ -10,10 +10,6 @@ apply from: './config/packaging.gradle'
 
 apply plugin: 'kotlin-kapt'
 
-kapt {
-    generateStubs true
-}
-
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType(KotlinCompile).all {
@@ -49,7 +45,7 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com/\""
             buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.95960771248584%2C-85.66844540535385&z=16\""
 
-            resValue "string", "google_maps_key_res", "AIzaSyD6N_6-RoBEtKo9eXu3op8kS2sIgy-0Czk"
+            resValue "string", "google_maps_key", "AIzaSyD6N_6-RoBEtKo9eXu3op8kS2sIgy-0Czk"
             resValue "string", "account_type", android.defaultConfig.applicationId + applicationIdSuffix
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
@@ -68,7 +64,7 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://avenue-for-the-arts-backend.herokuapp.com\""
             buildConfigField "String", "VENUE_MAP_URL", "\"https://www.google.com/maps/d/u/0/viewer?mid=1qx2B4eYIFcgWSOJKGsaKDoV0Z44&ll=42.95960771248584%2C-85.66844540535385&z=16\""
 
-            resValue "string", "google_maps_key_res", "AIzaSyDS0inkMeNebXpFylzXw9y_TQndNRFUJqs"
+            resValue "string", "google_maps_key", "AIzaSyDS0inkMeNebXpFylzXw9y_TQndNRFUJqs"
             resValue "string", "account_type", android.defaultConfig.applicationId
             resValue "string", "content_authority", android.defaultConfig.applicationId + ".provider"
         }
@@ -129,7 +125,7 @@ dependencies {
 
     implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true;
     }
 }

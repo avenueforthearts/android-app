@@ -11,3 +11,8 @@
 *.realm*
 
 maximizer/config/signing/*
+
+fabric.properties
+
+*.jks
+*.apk
