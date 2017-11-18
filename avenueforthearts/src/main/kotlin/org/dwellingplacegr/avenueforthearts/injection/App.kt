@@ -6,7 +6,6 @@ import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import net.danlew.android.joda.JodaTimeAndroid
-import org.dwellingplacegr.avenueforthearts.sync.SyncHelper
 import timber.log.BuildConfig
 import timber.log.Timber
 
@@ -35,7 +34,7 @@ class App : MultiDexApplication() {
     graph.inject(this)
 
     @Suppress("ConstantConditionIf")
-    if (BuildConfig.DEBUG) {
+    if (!BuildConfig.DEBUG) {
       // Dont spam crashlytics with dev crashes
       Fabric.with(applicationContext, Crashlytics())
     }

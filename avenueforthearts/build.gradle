@@ -78,7 +78,7 @@ repositories {
 
 dependencies {
     // Support library
-    def supportVersion = "27.0.0"
+    def supportVersion = "27.0.1"
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:recyclerview-v7:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
@@ -86,13 +86,11 @@ dependencies {
     implementation "com.android.support:cardview-v7:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:multidex:1.0.2'
-    implementation "com.google.android.gms:play-services-maps:11.4.2"
+    implementation "com.google.android.gms:play-services-maps:11.6.0"
 
     // Dependency injection
     def daggerVersion = "2.12"
     implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation 'com.google.android.gms:play-services-maps:11.4.2'
-    implementation 'com.android.support:appcompat-v7:27.0.0'
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Kotlin
@@ -115,7 +113,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // Logging
-    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'com.jakewharton.timber:timber:4.6.0'
 
     // Date/Time
     implementation 'net.danlew:android.joda:2.9.9'
@@ -126,6 +124,6 @@ dependencies {
     implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
 
     implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true;
+        transitive = true
     }
 }

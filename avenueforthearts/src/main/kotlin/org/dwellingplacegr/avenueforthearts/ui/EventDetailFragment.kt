@@ -79,7 +79,7 @@ class EventDetailFragment: Fragment(), OnMapReadyCallback {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       android.R.id.home -> {
-        activity?.finish()
+        activity?.onBackPressed()
         true
       }
       else -> { false }
